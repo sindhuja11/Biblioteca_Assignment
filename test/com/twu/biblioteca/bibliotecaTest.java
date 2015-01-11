@@ -95,7 +95,26 @@ public class bibliotecaTest {
                 "Java The Complete Reference              Herbert Schildt                 2005\n" +
                 "Software Engineering                     Zakkiuddin Ahmed                2012\n", outContent.toString());
     }
-
-
+    @Test
+    public void ShouldCheckUnsuccessfullCheckout() {
+        Scanner input=new Scanner("Digital Fortress");
+        new BibliotecaBorrowedbooks().CheckOutBook(input);
+        new BibliotecaBorrowedbooks().UnsuccessfulCheckout("Digital Fortress");
+        assertEquals("That book is not available\n",outContent.toString());
+    }
+    @Test
+    public void ShouldCheckReturnOfABook() {
+        Scanner input=new Scanner("Digital Fortress");
+        new BibliotecaBorrowedbooks().CheckOutBook(input);
+        new BibliotecaBorrowedbooks().ReturningBook("Digital Fortress");
+        assertEquals("Thank you for returning the book\n",outContent.toString());
+    }
+    @Test
+    public void ShouldCheckUnsuccessfullReturn() {
+        Scanner input=new Scanner("Digital Fortress");
+        new BibliotecaBorrowedbooks().CheckOutBook(input);
+        new BibliotecaBorrowedbooks().UnsuccessfullReturn("Digital Fortress");
+        assertEquals("This is not a valid book to return\n",outContent.toString());
+    }
 
 }

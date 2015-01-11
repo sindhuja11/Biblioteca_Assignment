@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class BibliotecaBorrowedbooks {
     static ArrayList<String> BorrowedBooks=new ArrayList<String>();
     public String CheckOutBook(Scanner input) {
-        String bookname=input.next();
+        String bookname=input.nextLine();
         BorrowedBooks.add(bookname);
 
         return "Book Checked Out";
@@ -37,5 +37,27 @@ public class BibliotecaBorrowedbooks {
             e.printStackTrace();
         }
 
+    }
+
+    public void UnsuccessfulCheckout(String bookname) {
+
+        String bookborrowed=BorrowedBooks.get(0);
+        if(bookborrowed.equals(bookname))
+        {
+            System.out.println("That book is not available");
+        }
+
+    }
+
+    public void ReturningBook(String bookname) {
+        BorrowedBooks.remove(bookname);
+        System.out.println("Thank you for returning the book");
+    }
+
+    public void UnsuccessfullReturn(String bookname) {
+    if(bookname.equals(BorrowedBooks.get(0)))
+    {
+        System.out.println("This is not a valid book to return");
+    }
     }
 }
