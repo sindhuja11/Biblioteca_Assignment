@@ -39,14 +39,14 @@ public class bibliotecaTest {
         new BibliotecaApp().welcomeMessage();
         assertEquals("hello!Welcome to Biblioteca\n", outContent.toString());
     }
-   /* @Test
+    @Test
     public void ShouldCheckBookDetails() {
-        new BibliotecaApp().DisplayOfBookDetails();
+        new BibliotecaApp().displayOfBookDetails();
         assertEquals("Bookname                                  Author                        Year Published\n" +
                 "Digital Fortress                         Dan Brown                       1998\n" +
                 "Java The Complete Reference              Herbert Schildt                 2005\n" +
                 "Software Engineering                     Zakkiuddin Ahmed                2012\n",outContent.toString());
-    }*/
+    }
 
 
     @Test
@@ -87,41 +87,42 @@ public class bibliotecaTest {
     public void shouldCheckOutBook() {
         Scanner input=new Scanner("Digital Fortress");
         outContent.reset();
-        new BibliotecaApp().checkOutBook(input);
+        new Librarian().checkOutBook(input);
         assertEquals("Book Checked Out\n", outContent.toString());
     }
     @Test
     public void shouldCheckDisplayOfBooksAfterCheckOut() {
         Scanner input=new Scanner("Digital Fortress");
-        new BibliotecaApp().checkOutBook(input);
+        new Librarian().checkOutBook(input);
+        Scanner nextInput=new Scanner("Java The Complete Reference");
+        new Librarian().checkOutBook(nextInput);
         outContent.reset();
-        new BibliotecaApp().displayAfterCheckOutOfBook();
+        new Librarian().displayAfterCheckOutOfBook();
         assertEquals("Bookname                                  Author                        Year Published\n" +
-                "Java The Complete Reference              Herbert Schildt                 2005\n" +
                 "Software Engineering                     Zakkiuddin Ahmed                2012\n", outContent.toString());
     }
     @Test
     public void shouldCheckUnsuccessfullCheckout() {
         Scanner input=new Scanner("Digital Fortress");
-        new BibliotecaApp().checkOutBook(input);
+        new Librarian().checkOutBook(input);
         outContent.reset();
-        new BibliotecaApp().unsuccessfulCheckout("Digital Fortress");
+        new Librarian().unsuccessfulCheckout("Digital Fortress");
         assertEquals("That book is not available\n", outContent.toString());
     }
     @Test
     public void shouldCheckReturnOfABook() {
         Scanner input=new Scanner("Digital Fortress");
-        new BibliotecaApp().checkOutBook(input);
+        new Librarian().checkOutBook(input);
         outContent.reset();
-        new BibliotecaApp().returningBook("Digital Fortress");
+        new Librarian().returningBook("Digital Fortress");
         assertEquals("Thank you for returning the book\n",outContent.toString());
     }
     @Test
     public void shouldCheckUnsuccessfullReturn() {
         Scanner input=new Scanner("Java The Complete Reference");
-        new BibliotecaApp().checkOutBook(input);
+        new Librarian().checkOutBook(input);
         outContent.reset();
-        new BibliotecaApp().unsuccessfullReturn("Digital Fortress");
+        new Librarian().unsuccessfullReturn("Digital Fortress");
         assertEquals("This is not a valid book to return\n", outContent.toString());
     }
 

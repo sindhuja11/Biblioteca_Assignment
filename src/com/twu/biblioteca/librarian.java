@@ -9,10 +9,10 @@ import java.util.Scanner;
 /**
  * Created by Administrator on 11/01/15.
  */
-public class BibliotecaBorrowedbooks {
+public class Librarian {
     static ArrayList<String> BorrowedBooks=new ArrayList<String>();
 
-    public void CheckOutBook(Scanner input) {
+    public void checkOutBook(Scanner input) {
         String bookname=input.nextLine();
         int borrowedbook=0;
         //BorrowedBooks.add("Digital Fortress");
@@ -27,39 +27,52 @@ public class BibliotecaBorrowedbooks {
             BorrowedBooks.add(bookname);
 
             System.out.println("Book Checked Out");
+           // new Librarian().displayAfterCheckOutOfBook();
+        }
+        if(borrowedbook==1)
+        {
+            new Librarian().unsuccessfulCheckout(bookname);
         }
 
-            }
-
-    public void DisplayAfterCheckOutOfBook()
+    }
+    public void displayAfterCheckOutOfBook()
     {
         String line="";
-
+        int flag=0;
         try {
             FileReader fr = new FileReader("/Users/Administrator/Downloads/TWU_Biblioteca-master/src/com/twu/biblioteca/booklist");
             BufferedReader br = new BufferedReader(fr);
+            System.out.println(br.readLine());
             while ((line = br.readLine()) != null) {
-                if(!(line.startsWith(BorrowedBooks.get(0))))
-                {
-                    System.out.println(line);
+                for(int noofbooks=0;noofbooks<BorrowedBooks.size();noofbooks++) {
+                    if ((line.startsWith(BorrowedBooks.get(noofbooks)))) {
+                        flag=1;
+                        //System.out.println(line);
+                        //break;
+                    }
+//                    else
+//                      break;
                 }
-
+                if(flag==0)
+                    System.out.println(line);
+                flag=0;
             }
         }
         catch (IOException e) {
             e.printStackTrace();
         }
     }
+    public void unsuccessfulCheckout(String bookname) {
+        for(int noofbooks=0;noofbooks<BorrowedBooks.size();noofbooks++) {
 
-    public void UnsuccessfulCheckout(String bookname) {
-           String bookborrowed = BorrowedBooks.get(0);
+            String bookborrowed = BorrowedBooks.get(noofbooks);
             if (bookborrowed.equals(bookname)) {
                 System.out.println("That book is not available");
             }
         }
-
-
-    public void ReturningBook(String bookname) {
+    }
+    public void returningBook(String bookname) {
+        int flag=0;
         if(BorrowedBooks.size()==0)
         {
             return;
@@ -67,18 +80,25 @@ public class BibliotecaBorrowedbooks {
         else {
             for(int noofbooks=0;noofbooks<BorrowedBooks.size();noofbooks++) {
                 if (bookname.equals(BorrowedBooks.get(noofbooks))) {
+                    flag=1;
                     BorrowedBooks.remove(bookname);
                     System.out.println("Thank you for returning the book");
 
                 }
             }
         }
+        if(flag==0)
+        {
+            new Librarian().unsuccessfullReturn(bookname);
+        }
     }
 
-    public void UnsuccessfullReturn(String bookname) {
-    if(bookname.equals(BorrowedBooks.get(0)))
-    {
-        System.out.println("This is not a valid book to return");
+    public void unsuccessfullReturn(String bookname) {
+        for(int noofbooks=0;noofbooks<BorrowedBooks.size();noofbooks++) {
+            if (!(bookname.equals(BorrowedBooks.get(noofbooks)))) {
+                System.out.println("This is not a valid book to return");
+            }
+        }
     }
     }
-}
+

@@ -7,12 +7,12 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class BibliotecaApp {
-    static ArrayList<String> BorrowedBooks=new ArrayList<String>();
+   // static ArrayList<String> BorrowedBooks=new ArrayList<String>();
 
     public static void main(String[] args) {
-    BibliotecaApp customer=new BibliotecaApp();
+        BibliotecaApp customer=new BibliotecaApp();
+       // Librarian librarian=new Librarian();
         customer.welcomeMessage();
-        //customer.DisplayOfBookDetails();
         int option;
         do {
             customer.menuDisplay();
@@ -21,11 +21,11 @@ public class BibliotecaApp {
             customer.invalidMenuOption(option);
             if(option==2||option==3) {
                 System.out.println("Enter the bookname");
-                Scanner bookname = new Scanner(System.in);
-                customer.bookTransaction(option,bookname);
+                Scanner bookname= new Scanner(System.in);
+                customer.bookTransaction(option, bookname);
                 if(option==2)
                 {
-                    customer.displayAfterCheckOutOfBook();
+                    new Librarian().displayAfterCheckOutOfBook();
                 }
             }
             else
@@ -39,12 +39,12 @@ public class BibliotecaApp {
     private void bookTransaction(int option, Scanner input) {
         if(option==2)
         {
-            new BibliotecaApp().checkOutBook(input);
+            new Librarian().checkOutBook(input);
         }
         if(option==3)
         {
             String bookname=input.nextLine();
-            new BibliotecaApp().returningBook(bookname);
+            new Librarian().returningBook(bookname);
         }
     }
 
@@ -53,11 +53,7 @@ public class BibliotecaApp {
         System.out.println("hello!Welcome to Biblioteca");
     }
 
-
-
-
-
-    /*public void DisplayOfBookDetails() {
+   public void displayOfBookDetails() {
         String line = "";
         try {
             FileReader fr = new FileReader("/Users/Administrator/Downloads/TWU_Biblioteca-master/src/com/twu/biblioteca/booklist");
@@ -72,7 +68,8 @@ public class BibliotecaApp {
         }
 
     }
-*/
+
+
     public void menuDisplay() {
         String line = "";
         try {
@@ -95,18 +92,8 @@ public class BibliotecaApp {
           }
     public void selectedOption(int menunumber) {
            if(menunumber==1) {
-               String line = "";
-               try {
-                   FileReader fr = new FileReader("/Users/Administrator/Downloads/TWU_Biblioteca-master/src/com/twu/biblioteca/booklist");
-                   BufferedReader br = new BufferedReader(fr);
-                   while ((line = br.readLine()) != null) {
 
-                       System.out.println(line);
-                   }
-               } catch (IOException e) {
-                   e.printStackTrace();
-               }
-
+               new BibliotecaApp().displayOfBookDetails();
            }
         if(menunumber==4)
         {
@@ -142,7 +129,7 @@ public class BibliotecaApp {
         }
         return null;
     }
-    public void checkOutBook(Scanner input) {
+   /* public void checkOutBook(Scanner input) {
         String bookname=input.nextLine();
         int borrowedbook=0;
         //BorrowedBooks.add("Digital Fortress");
@@ -219,6 +206,6 @@ public class BibliotecaApp {
             }
         }
     }
-
+*/
 
 }
