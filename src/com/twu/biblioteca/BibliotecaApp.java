@@ -11,41 +11,45 @@ public class BibliotecaApp {
 
     public static void main(String[] args) {
     BibliotecaApp customer=new BibliotecaApp();
-        customer.WelcomeMessage();
+        customer.welcomeMessage();
         //customer.DisplayOfBookDetails();
         int option;
         do {
-            customer.MenuDisplay();
+            customer.menuDisplay();
             Scanner input = new Scanner(System.in);
-            option = customer.OptionChosen(input);
-            customer.InvalidMenuOption(option);
+            option = customer.optionChosen(input);
+            customer.invalidMenuOption(option);
             if(option==2||option==3) {
                 System.out.println("Enter the bookname");
                 Scanner bookname = new Scanner(System.in);
-                customer.BookTransaction(option,bookname);
+                customer.bookTransaction(option,bookname);
+                if(option==2)
+                {
+                    customer.displayAfterCheckOutOfBook();
+                }
             }
             else
-            customer.SelectedOption(option);
+            customer.selectedOption(option);
 
            }while(option!=4);
 
 
     }
 
-    private void BookTransaction(int option, Scanner input) {
+    private void bookTransaction(int option, Scanner input) {
         if(option==2)
         {
-            new BibliotecaApp().CheckOutBook(input);
+            new BibliotecaApp().checkOutBook(input);
         }
         if(option==3)
         {
             String bookname=input.nextLine();
-            new BibliotecaApp().ReturningBook(bookname);
+            new BibliotecaApp().returningBook(bookname);
         }
     }
 
 
-    public void WelcomeMessage() {
+    public void welcomeMessage() {
         System.out.println("hello!Welcome to Biblioteca");
     }
 
@@ -69,7 +73,7 @@ public class BibliotecaApp {
 
     }
 */
-    public void MenuDisplay() {
+    public void menuDisplay() {
         String line = "";
         try {
             FileReader fr = new FileReader("/Users/Administrator/Downloads/TWU_Biblioteca-master/src/com/twu/biblioteca/menu");
@@ -85,11 +89,11 @@ public class BibliotecaApp {
 
     }
 
-    public int OptionChosen(Scanner input) {
+    public int optionChosen(Scanner input) {
         int menunumber=input.nextInt();
         return menunumber;
           }
-    public void SelectedOption(int menunumber) {
+    public void selectedOption(int menunumber) {
            if(menunumber==1) {
                String line = "";
                try {
@@ -106,12 +110,12 @@ public class BibliotecaApp {
            }
         if(menunumber==4)
         {
-            new BibliotecaApp().Quit(menunumber);
+            new BibliotecaApp().quit(menunumber);
         }
 
     }
 
-    public void InvalidMenuOption(int menunumber) {
+    public void invalidMenuOption(int menunumber) {
         int count=0;
         try {
             FileReader fr = new FileReader("/Users/Administrator/Downloads/TWU_Biblioteca-master/src/com/twu/biblioteca/menu");
@@ -132,13 +136,13 @@ public class BibliotecaApp {
 
     }
 
-    public String Quit(int menuinput) {
+    public String quit(int menuinput) {
         if(menuinput==4) {
             return "Thank You!";
         }
         return null;
     }
-    public void CheckOutBook(Scanner input) {
+    public void checkOutBook(Scanner input) {
         String bookname=input.nextLine();
         int borrowedbook=0;
         //BorrowedBooks.add("Digital Fortress");
@@ -153,15 +157,15 @@ public class BibliotecaApp {
             BorrowedBooks.add(bookname);
 
             System.out.println("Book Checked Out");
-            new BibliotecaApp().DisplayAfterCheckOutOfBook();
+            //new BibliotecaApp().displayAfterCheckOutOfBook();
         }
         if(borrowedbook==1)
         {
-            new BibliotecaApp().UnsuccessfulCheckout(bookname);
+            new BibliotecaApp().unsuccessfulCheckout(bookname);
         }
 
     }
-    public void DisplayAfterCheckOutOfBook()
+    public void displayAfterCheckOutOfBook()
     {
         String line="";
 
@@ -180,13 +184,13 @@ public class BibliotecaApp {
             e.printStackTrace();
         }
     }
-    public void UnsuccessfulCheckout(String bookname) {
+    public void unsuccessfulCheckout(String bookname) {
         String bookborrowed = BorrowedBooks.get(0);
         if (bookborrowed.equals(bookname)) {
             System.out.println("That book is not available");
         }
     }
-    public void ReturningBook(String bookname) {
+    public void returningBook(String bookname) {
         int flag=0;
         if(BorrowedBooks.size()==0)
         {
@@ -204,11 +208,11 @@ public class BibliotecaApp {
         }
         if(flag==0)
         {
-            new BibliotecaApp().UnsuccessfullReturn(bookname);
+            new BibliotecaApp().unsuccessfullReturn(bookname);
         }
     }
 
-    public void UnsuccessfullReturn(String bookname) {
+    public void unsuccessfullReturn(String bookname) {
         for(int noofbooks=0;noofbooks<BorrowedBooks.size();noofbooks++) {
             if (!(bookname.equals(BorrowedBooks.get(noofbooks)))) {
                 System.out.println("This is not a valid book to return");
