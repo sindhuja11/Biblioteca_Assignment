@@ -11,12 +11,26 @@ import java.util.Scanner;
  */
 public class BibliotecaBorrowedbooks {
     static ArrayList<String> BorrowedBooks=new ArrayList<String>();
-    public String CheckOutBook(Scanner input) {
-        String bookname=input.nextLine();
-        BorrowedBooks.add(bookname);
 
-        return "Book Checked Out";
-    }
+    public void CheckOutBook(Scanner input) {
+        String bookname=input.nextLine();
+        int borrowedbook=0;
+        //BorrowedBooks.add("Digital Fortress");
+        for(int noofbooks=0;noofbooks<BorrowedBooks.size();noofbooks++) {
+            if (BorrowedBooks.get(noofbooks).equals(bookname))
+            {
+                borrowedbook=1;
+            }
+
+        }
+        if(borrowedbook==0) {
+            BorrowedBooks.add(bookname);
+
+            System.out.println("Book Checked Out");
+        }
+
+            }
+
     public void DisplayAfterCheckOutOfBook()
     {
         String line="";
@@ -38,18 +52,27 @@ public class BibliotecaBorrowedbooks {
     }
 
     public void UnsuccessfulCheckout(String bookname) {
-
-        String bookborrowed=BorrowedBooks.get(0);
-        if(bookborrowed.equals(bookname))
-        {
-            System.out.println("That book is not available");
+           String bookborrowed = BorrowedBooks.get(0);
+            if (bookborrowed.equals(bookname)) {
+                System.out.println("That book is not available");
+            }
         }
 
-    }
 
     public void ReturningBook(String bookname) {
-        BorrowedBooks.remove(bookname);
-        System.out.println("Thank you for returning the book");
+        if(BorrowedBooks.size()==0)
+        {
+            return;
+        }
+        else {
+            for(int noofbooks=0;noofbooks<BorrowedBooks.size();noofbooks++) {
+                if (bookname.equals(BorrowedBooks.get(noofbooks))) {
+                    BorrowedBooks.remove(bookname);
+                    System.out.println("Thank you for returning the book");
+
+                }
+            }
+        }
     }
 
     public void UnsuccessfullReturn(String bookname) {
