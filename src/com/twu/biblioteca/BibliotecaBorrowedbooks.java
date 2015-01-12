@@ -25,18 +25,16 @@ public class BibliotecaBorrowedbooks {
             FileReader fr = new FileReader("/Users/Administrator/Downloads/TWU_Biblioteca-master/src/com/twu/biblioteca/booklist");
             BufferedReader br = new BufferedReader(fr);
             while ((line = br.readLine()) != null) {
-                if(line.startsWith(BorrowedBooks.get(0)))
+                if(!(line.startsWith(BorrowedBooks.get(0))))
                 {
-
+                    System.out.println(line);
                 }
-                else
-                System.out.println(line);
+
             }
         }
         catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     public void UnsuccessfulCheckout(String bookname) {

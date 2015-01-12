@@ -13,7 +13,7 @@ public class BibliotecaApp {
     }
 
 
-    public void CheckWelcomeMessage(String message) {
+    public void WelcomeMessage(String message) {
         System.out.print(message);
     }
 
@@ -21,7 +21,7 @@ public class BibliotecaApp {
 
 
 
-    public void CheckDisplayOfBookDetails() {
+    public void DisplayOfBookDetails() {
         String line = "";
         try {
             FileReader fr = new FileReader("/Users/Administrator/Downloads/TWU_Biblioteca-master/src/com/twu/biblioteca/booklist");
@@ -37,7 +37,7 @@ public class BibliotecaApp {
 
     }
 
-    public void CheckMenu() {
+    public void MenuDisplay() {
         String line = "";
         try {
             FileReader fr = new FileReader("/Users/Administrator/Downloads/TWU_Biblioteca-master/src/com/twu/biblioteca/menu");
@@ -53,11 +53,11 @@ public class BibliotecaApp {
 
     }
 
-    public int CheckOptionChosen(Scanner input) {
+    public int OptionChosen(Scanner input) {
         int menunumber=input.nextInt();
         return menunumber;
     }
-    public void CheckDisplayOfBooks(int menunumber) {
+    public void DisplayOfBooks(int menunumber) {
             String line = "";
             try {
                 FileReader fr = new FileReader("/Users/Administrator/Downloads/TWU_Biblioteca-master/src/com/twu/biblioteca/booklist");
@@ -75,7 +75,7 @@ public class BibliotecaApp {
 
     }
 
-    public void CheckInvalidMenuOption(int menunumber) {
+    public void InvalidMenuOption(int menunumber) {
         int count=0;
         try {
             FileReader fr = new FileReader("/Users/Administrator/Downloads/TWU_Biblioteca-master/src/com/twu/biblioteca/menu");
@@ -95,7 +95,7 @@ public class BibliotecaApp {
 
     }
 
-    public String CheckQuit(Scanner input) {
+    public String Quit(Scanner input) {
         String menuinput=input.next();
         if(menuinput.equals("Quit")) {
             return "Thank You!";

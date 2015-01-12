@@ -36,12 +36,12 @@ public class bibliotecaTest {
     }
     @Test
     public void ShouldCheckWelcomeMessage() {
-        new BibliotecaApp().CheckWelcomeMessage("hello!Welcome to Biblioteca");
+        new BibliotecaApp().WelcomeMessage("hello!Welcome to Biblioteca");
         assertEquals("hello!Welcome to Biblioteca", outContent.toString());
     }
     @Test
     public void ShouldCheckBookDetails() {
-        new BibliotecaApp().CheckDisplayOfBookDetails();
+        new BibliotecaApp().DisplayOfBookDetails();
         assertEquals("Bookname                                  Author                        Year Published\n" +
                 "Digital Fortress                         Dan Brown                       1998\n" +
                 "Java The Complete Reference              Herbert Schildt                 2005\n" +
@@ -52,18 +52,18 @@ public class bibliotecaTest {
     @Test
     public void ShouldCheckMenu() {
 
-    new BibliotecaApp().CheckMenu();
+    new BibliotecaApp().MenuDisplay();
     assertEquals("Menu\n" +
             "Press 1 for Books List\n",outContent.toString());
     }
     @Test
     public void ShouldCheckOptionChosen() {
         Scanner input = new Scanner("1");
-        assertEquals(1, new BibliotecaApp().CheckOptionChosen(input));
+        assertEquals(1, new BibliotecaApp().OptionChosen(input));
     }
     @Test
     public void ShouldCheckDisplayOfBooks() {
-        new BibliotecaApp().CheckDisplayOfBooks(1);
+        new BibliotecaApp().DisplayOfBooks(1);
         assertEquals("Bookname                                  Author                        Year Published\n" +
                 "Digital Fortress                         Dan Brown                       1998\n" +
                 "Java The Complete Reference              Herbert Schildt                 2005\n" +
@@ -72,14 +72,14 @@ public class bibliotecaTest {
     }
     @Test
     public void ShouldCheckInvalidMenuOption() {
-        new BibliotecaApp().CheckInvalidMenuOption(2);
+        new BibliotecaApp().InvalidMenuOption(2);
         assertEquals("Select a valid option\n", outContent.toString());
 
     }
     @Test
     public void ShouldCheckQuit() {
         Scanner input =new Scanner("Quit");
-        assertEquals("Thank You!", new BibliotecaApp().CheckQuit(input));
+        assertEquals("Thank You!", new BibliotecaApp().Quit(input));
     }
     @Test
     public void ShouldCheckOutBook() {
@@ -116,5 +116,6 @@ public class bibliotecaTest {
         new BibliotecaBorrowedbooks().UnsuccessfullReturn("Digital Fortress");
         assertEquals("This is not a valid book to return\n",outContent.toString());
     }
+
 
 }
