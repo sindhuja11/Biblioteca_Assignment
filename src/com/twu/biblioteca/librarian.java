@@ -47,11 +47,7 @@ public class Librarian {
                 for(int noofbooks=0;noofbooks<BorrowedBooks.size();noofbooks++) {
                     if ((line.startsWith(BorrowedBooks.get(noofbooks)))) {
                         flag=1;
-                        //System.out.println(line);
-                        //break;
                     }
-//                    else
-//                      break;
                 }
                 if(flag==0)
                     System.out.println(line);
