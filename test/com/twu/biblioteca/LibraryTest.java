@@ -21,12 +21,13 @@ public class LibraryTest {
 
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
+    private Book book =new Book("Digital Fortress","Dan Brown","1998",true);
 
     @Before
     public void setUpStreams() {
-        Book b=new Book("Digital Fortress","Dan Brown","1998",1);
-        books.add(b);
-        books.add(new Book("Java The Complete Reference","Herbert Schildt","2005",1));
+        books.add(book);
+        books.add(new Book("Java The Complete Reference","Herbert Schildt","2005",true));
+        books.add(new Book("Software Engineering","Zakkiuddin Ahmed","2012",true));
 
         System.setOut(new PrintStream(outContent));
         System.setErr(new PrintStream(errContent));
@@ -39,42 +40,55 @@ public class LibraryTest {
     }
     @Test
     public void ShouldCheckBookDetails() {
-      new Library(books).displayOfBookDetails();
-        assertEquals("Digital Fortress,Dan Brown,1998\n"+
-                "Java The Complete Reference,Herbert Schildt,2005\n",outContent.toString());
+      ArrayList<Book> availablebooks=new ArrayList<Book>();
+      availablebooks.add(new Book("Digital Fortress","Dan Brown","1998",true));
+      availablebooks.add(new Book("Java The Complete Reference","Herbert Schildt","2005",true));
+        availablebooks.add(new Book("Software Engineering","Zakkiuddin Ahmed","2012",true));
+
+        ArrayList<Book> returnedlist=new Library(books).giveBookDetails();
+          for(int noofbooks=0;noofbooks<availablebooks.size();noofbooks++) {
+            assertEquals(availablebooks.get(noofbooks).getBookName(),returnedlist.get(noofbooks).getBookName());
+            assertEquals(availablebooks.get(noofbooks).getAuthor(),returnedlist.get(noofbooks).getAuthor());
+            assertEquals(availablebooks.get(noofbooks).getyearPublished(),returnedlist.get(noofbooks).getyearPublished());
+        }
     }
 
     @Test
     public void shouldCheckOutBook() {
 
-        outContent.reset();
-        new Library(books).checkOutBook("Digital Fortress");
-        assertEquals("Book Checked Out\n", outContent.toString());
+        assertEquals(true, new Library(books).checkOutBook(new Book("Digital Fortress","Dan Brown","1998",true)));
+
+       // assertEquals("Book Checked Out\n", outContent.toString());
     }
 
     @Test
     public void shouldNotCheckOutBook() {
 
-        outContent.reset();
-        new Library(books).checkOutBook("Digital Fortress");
-        outContent.reset();
-        new Library(books).checkOutBook("Digital Fortress");
-        assertEquals("That book is not available\n", outContent.toString());
+//        new Library(books).checkOutBook("Digital Fortress");
+        new Library(books).checkOutBook(new Book("Digital Fortress","Dan Brown","1998",true));
+        assertEquals(false, new Library(books).checkOutBook(new Book("Digital Fortress","Dan Brown","1998",true)));
     }
     @Test
     public void shouldCheckReturnOfABook() {
-        new Library(books).checkOutBook("Digital Fortress");
-        outContent.reset();
-        new Library(books).returningBook("Digital Fortress");
-        assertEquals("Thank you for returning the book\n",outContent.toString());
+        new Library(books).checkOutBook(new Book("Digital Fortress","Dan Brown","1998",true));
+          assertEquals(true, new Library(books).returningBook("Digital Fortress"));
     }
     @Test
     public void shouldNotReturnOfABook() {
-        outContent.reset();
-        new Library(books).returningBook("Digital Fortress");
-        assertEquals("This is not a valid book to return\n", outContent.toString());
+        assertEquals(true,  new Library(books).returningBook("Digital Fortress"));
+
     }
 
+    @Test
+    public void shouldCheckFindingBook() {
+        Library library = new Library(books);
+        assertEquals(book, library.find("Digital Fortress"));
+    }
+    @Test
+    public void shouldCheckNotFindingBook() {
+        Library library=new Library(books);
+        assertEquals(null,library.find("Head First Java"));
+    }
 
 
 }

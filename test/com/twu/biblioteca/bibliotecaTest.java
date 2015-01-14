@@ -14,7 +14,7 @@ import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
-public class bibliotecaTest {
+public class BibliotecaTest {
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
 
@@ -54,15 +54,15 @@ public class bibliotecaTest {
         Scanner input = new Scanner("1");
         assertEquals(1, new BibliotecaApp().optionChosen(input));
     }
-   /* @Test
-    public void shouldCheckSelectedOption() {
-        new BibliotecaApp().selectedOption(1);
-        assertEquals("Bookname                                  Author                        Year Published\n" +
-                "Digital Fortress                         Dan Brown                       1998\n" +
-                "Java The Complete Reference              Herbert Schildt                 2005\n" +
-                "Software Engineering                     Zakkiuddin Ahmed                2012\n",outContent.toString());
+    @Test
+    public void shouldCheckOption1() {
+        new BibliotecaApp().displayBookList();
+        assertEquals("Digital Fortress,Dan Brown,1998\n" +
+                "Java The Complete Reference,Herbert Schildt,2005\n" +
+                "Software Engineering,Zakkiuddin Ahmed,2012\n",outContent.toString());
 
-    }*/
+
+    }
     @Test
     public void shouldCheckInvalidMenuOption() {
         new BibliotecaApp().invalidMenuOption(5);
@@ -71,7 +71,7 @@ public class bibliotecaTest {
     }
     @Test
     public void shouldCheckQuit() {
-        assertEquals("Thank You!", new BibliotecaApp().quit(4));
+        assertEquals("Thank You!", new BibliotecaApp().quit());
     }
 
 }

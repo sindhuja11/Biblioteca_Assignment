@@ -8,7 +8,6 @@ import java.util.Scanner;
 
 public class BibliotecaApp {
     ArrayList<Book> books=new ArrayList<Book>();
-    ArrayList<String> menu=new ArrayList<String>();
     public static void main(String[] args) {
         BibliotecaApp customer = new BibliotecaApp();
         customer.books=new BookParser().readFile();
@@ -25,8 +24,11 @@ public class BibliotecaApp {
                 String bookname = bookinput.nextLine();
                 customer.bookTransaction(option, bookname);
 
-            } else
-                customer.selectedOption(option);
+            }
+                if(option==1)
+                customer.displayBookList();
+                if(option==4)
+                customer.quit();
 
         } while (option != 4);
 
@@ -34,13 +36,30 @@ public class BibliotecaApp {
     }
 
     public void bookTransaction(int option, String bookname) {
+        Library library = new Library(books);
         if(option==2)
         {
-            new Library(books).checkOutBook(bookname);
+            Book book = library.find(bookname);
+            boolean availablility= library.checkOutBook(book);
+            if(availablility)
+            {
+                System.out.println("Book Checked Out");
+            }
+            else
+            System.out.println("That book is not available");
         }
         if(option==3)
         {
-              new Library(books).returningBook(bookname);
+              boolean availability= library.returningBook(bookname);
+            if(availability)
+            {
+                System.out.println("Thank you for returning the book");
+
+
+            }
+            else
+                System.out.println("This is not a valid book to return");
+
         }
     }
 
@@ -69,15 +88,15 @@ public class BibliotecaApp {
         int menunumber=input.nextInt();
         return menunumber;
           }
-    public void selectedOption(int menunumber) {
-           if(menunumber==1) {
+    public void displayBookList() {
 
-           new Library(books).displayOfBookDetails();
-           }
-        if(menunumber==4)
-        {
-            new BibliotecaApp().quit(menunumber);
-        }
+            ArrayList<Book> booklist;
+              // books=new BookParser().readFile();
+               booklist = new Library(books).giveBookDetails();
+               for(int noofbooks=0;noofbooks<booklist.size();noofbooks++)
+               {
+                   System.out.println(booklist.get(noofbooks).getBookName()+","+booklist.get(noofbooks).getAuthor()+","+booklist.get(noofbooks).getyearPublished());
+               }
 
     }
 
@@ -102,11 +121,11 @@ public class BibliotecaApp {
 
     }
 
-    public String quit(int menuinput) {
-        if(menuinput==4) {
+    public String quit() {
+
             return "Thank You!";
-        }
-        return null;
+
+
     }
 
 }

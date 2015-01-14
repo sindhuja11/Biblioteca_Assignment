@@ -6,61 +6,58 @@ import java.util.ArrayList;
  * Created by Administrator on 11/01/15.
  */
 public class Library {
-    ArrayList<Book> books;
-
+    private ArrayList<Book> books;
 
     public Library(ArrayList<Book> books) {
         this.books = books;
     }
 
-    public void displayOfBookDetails() {
+    public ArrayList<Book> giveBookDetails() {
+        ArrayList<Book> availablebooks = new ArrayList<Book>();
         for (Book book : books) {
-            if (book.getAvailability() == 1) {
-                System.out.println(book.getBookName() + "," + book.getAuthor() + "," + book.getyearPublished());
-
+            if (book.getAvailability()) {
+                availablebooks.add(book);
             }
 
         }
+        return availablebooks;
 
     }
 
-    public void checkOutBook(String bookname) {
-        int availability = 0;
-        int book;
-        for (book = 0; book < books.size(); book++) {
-            if (books.get(book).getBookName().equals(bookname)) {
-                availability = books.get(book).getAvailability();
-                break;
+    public boolean checkOutBook(Book book1) {
+        for (Book book : books) {
+            if (book.getBookName().equals(book1.getBookName())) {
+                if (book.getAvailability()) {
+                    book.setNotAvailable();
+                    return true;
+                }
             }
         }
-
-
-        if (availability == 1) {
-            System.out.println("Book Checked Out");
-            books.get(book).setAvailability();
-
-        }
-        if (availability == 0) {
-            System.out.println("That book is not available");
-        }
-
+        return false;
     }
 
 
-    public void returningBook(String bookname) {
+    public boolean returningBook(String bookname) {
 
         for (Book book : books) {
-            if (book.getBookName().equals(bookname) && book.getAvailability() == 0) {
-                System.out.println("Thank you for returning the book");
-
+            if (book.getBookName().equals(bookname) && !book.getAvailability()) {
+                book.setAvailable();
+                return book.getAvailability();
             }
-            if (book.getBookName().equals(bookname) && book.getAvailability() == 1) {
-                System.out.println("This is not a valid book to return");
-
+            if (book.getBookName().equals(bookname) && book.getAvailability()) {
+                return book.getAvailability();
 
             }
         }
+        return false;
+    }
 
+    public Book find(String name) {
+        for (Book book : books) {
+            if (book.getBookName().equals(name))
+                return book;
+        }
+        return null;
     }
 }
 
