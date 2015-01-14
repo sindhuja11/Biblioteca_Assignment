@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class BibliotecaApp {
     ArrayList<Book> books=new ArrayList<Book>();
-
+    ArrayList<String> menu=new ArrayList<String>();
     public static void main(String[] args) {
         BibliotecaApp customer = new BibliotecaApp();
         customer.books=new BookParser().readFile();
@@ -56,7 +56,6 @@ public class BibliotecaApp {
             FileReader fr = new FileReader("/Users/Administrator/Downloads/TWU_Biblioteca-master/src/files/menu");
             BufferedReader br = new BufferedReader(fr);
             while ((line = br.readLine()) != null) {
-
                 System.out.println(line);
             }
         }

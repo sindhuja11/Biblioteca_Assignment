@@ -39,15 +39,6 @@ public class bibliotecaTest {
         new BibliotecaApp().welcomeMessage();
         assertEquals("hello!Welcome to Biblioteca\n", outContent.toString());
     }
-    /*@Test
-    public void ShouldCheckBookDetails() {
-        new Librarian().displayOfBookDetails();
-        assertEquals("Digital Fortress,Dan Brown,1998\n"+
-                "Java The Complete Reference,Herbert Schildt,2005\n"+
-                "Software Engineering,Zakkiuddin Ahmed,2012\n",outContent.toString());
-    }
-*/
-
     @Test
     public void shouldCheckMenu() {
 
@@ -63,7 +54,7 @@ public class bibliotecaTest {
         Scanner input = new Scanner("1");
         assertEquals(1, new BibliotecaApp().optionChosen(input));
     }
-    @Test
+   /* @Test
     public void shouldCheckSelectedOption() {
         new BibliotecaApp().selectedOption(1);
         assertEquals("Bookname                                  Author                        Year Published\n" +
@@ -71,7 +62,7 @@ public class bibliotecaTest {
                 "Java The Complete Reference              Herbert Schildt                 2005\n" +
                 "Software Engineering                     Zakkiuddin Ahmed                2012\n",outContent.toString());
 
-    }
+    }*/
     @Test
     public void shouldCheckInvalidMenuOption() {
         new BibliotecaApp().invalidMenuOption(5);

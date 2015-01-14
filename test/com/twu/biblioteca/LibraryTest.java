@@ -10,7 +10,6 @@ import org.junit.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import static org.junit.Assert.assertEquals;
 
@@ -62,22 +61,6 @@ public class LibraryTest {
         new Library(books).checkOutBook("Digital Fortress");
         assertEquals("That book is not available\n", outContent.toString());
     }
-//    @Test
-//    public void shouldCheckDisplayOfBooksAfterCheckOut() {
-//        new Library(books).checkOutBook("Digital Fortress");
-//        outContent.reset();
-//        new Library(books).displayAfterCheckOutOfBook();
-//        assertEquals("Java The Complete Reference,Herbert Schildt,2005\n" +
-//                "Software Engineering,Zakkiuddin Ahmed,2012\n", outContent.toString());
-//    }
-//    @Test
-//    public void shouldCheckUnsuccessfullCheckout() {
-      // Scanner input=new Scanner("Digital Fortress");
-//        new Library(books).checkOutBook("Digital Fortress");
-//        outContent.reset();
-//        new Library(books).unsuccessfulCheckout("Digital Fortress");
-//        assertEquals("That book is not available\n", outContent.toString());
-//    }
     @Test
     public void shouldCheckReturnOfABook() {
         new Library(books).checkOutBook("Digital Fortress");
@@ -87,18 +70,10 @@ public class LibraryTest {
     }
     @Test
     public void shouldNotReturnOfABook() {
-       // new Library(books).checkOutBook("Digital Fortress");
         outContent.reset();
         new Library(books).returningBook("Digital Fortress");
         assertEquals("This is not a valid book to return\n", outContent.toString());
     }
-//    @Test
-//    public void shouldCheckUnsuccessfullReturn() {
-//        new Library(books).checkOutBook("Java The Complete Reference");
-//        outContent.reset();
-//        new Library(books).unsuccessfullReturn("Digital Fortress");
-//        assertEquals("This is not a valid book to return\n", outContent.toString());
-//    }
 
 
 
