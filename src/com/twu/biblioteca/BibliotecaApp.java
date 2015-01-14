@@ -3,12 +3,15 @@ package com.twu.biblioteca;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class BibliotecaApp {
+    ArrayList<Book> books=new ArrayList<Book>();
 
     public static void main(String[] args) {
-        BibliotecaApp customer=new BibliotecaApp();
+        BibliotecaApp customer = new BibliotecaApp();
+        customer.books=new BookParser().readFile();
         customer.welcomeMessage();
         int option;
         do {
@@ -16,32 +19,28 @@ public class BibliotecaApp {
             Scanner input = new Scanner(System.in);
             option = customer.optionChosen(input);
             customer.invalidMenuOption(option);
-            if(option==2||option==3) {
+            if (option == 2 || option == 3) {
                 System.out.println("Enter the bookname");
-                Scanner bookname= new Scanner(System.in);
+                Scanner bookinput = new Scanner(System.in);
+                String bookname = bookinput.nextLine();
                 customer.bookTransaction(option, bookname);
-                if(option==2)
-                {
-                    new Librarian().displayAfterCheckOutOfBook();
-                }
-            }
-            else
-            customer.selectedOption(option);
 
-           }while(option!=4);
+            } else
+                customer.selectedOption(option);
+
+        } while (option != 4);
 
 
     }
 
-    private void bookTransaction(int option, Scanner input) {
+    public void bookTransaction(int option, String bookname) {
         if(option==2)
         {
-            new Librarian().checkOutBook(input);
+            new Library(books).checkOutBook(bookname);
         }
         if(option==3)
         {
-            String bookname=input.nextLine();
-            new Librarian().returningBook(bookname);
+              new Library(books).returningBook(bookname);
         }
     }
 
@@ -50,27 +49,11 @@ public class BibliotecaApp {
         System.out.println("hello!Welcome to Biblioteca");
     }
 
-   public void displayOfBookDetails() {
-        String line = "";
-        try {
-            FileReader fr = new FileReader("/Users/Administrator/Downloads/TWU_Biblioteca-master/src/com/twu/biblioteca/booklist");
-            BufferedReader br = new BufferedReader(fr);
-            while ((line = br.readLine()) != null) {
-
-                System.out.println(line);
-            }
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
-
 
     public void menuDisplay() {
         String line = "";
         try {
-            FileReader fr = new FileReader("/Users/Administrator/Downloads/TWU_Biblioteca-master/src/com/twu/biblioteca/menu");
+            FileReader fr = new FileReader("/Users/Administrator/Downloads/TWU_Biblioteca-master/src/files/menu");
             BufferedReader br = new BufferedReader(fr);
             while ((line = br.readLine()) != null) {
 
@@ -90,7 +73,7 @@ public class BibliotecaApp {
     public void selectedOption(int menunumber) {
            if(menunumber==1) {
 
-               new BibliotecaApp().displayOfBookDetails();
+           new Library(books).displayOfBookDetails();
            }
         if(menunumber==4)
         {
@@ -102,7 +85,7 @@ public class BibliotecaApp {
     public void invalidMenuOption(int menunumber) {
         int count=0;
         try {
-            FileReader fr = new FileReader("/Users/Administrator/Downloads/TWU_Biblioteca-master/src/com/twu/biblioteca/menu");
+            FileReader fr = new FileReader("/Users/Administrator/Downloads/TWU_Biblioteca-master/src/files/menu");
             BufferedReader br = new BufferedReader(fr);
             while (br.readLine() != null) {
 
