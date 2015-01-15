@@ -17,7 +17,7 @@ public class BookParser {
             BufferedReader br = new BufferedReader(fr);
             while ((line = br.readLine()) != null) {
                 String bookdetails[]=line.split(",");
-                books.add(new Book(bookdetails[0],bookdetails[1],bookdetails[2],true));
+                books.add(new Book(bookdetails[0],bookdetails[1],bookdetails[2]));
             }
         }
         catch (IOException e) {

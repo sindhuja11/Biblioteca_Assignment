@@ -43,8 +43,6 @@ public class Library {
 
     }
 
-
-
     public Book find(String name) {
         for (Book book : books) {
             if (book.getBookName().equals(name))

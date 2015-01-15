@@ -7,15 +7,14 @@ public class Book {
    private String bookname;
    private String  author;
    private String yearpublished;
-   private boolean availability;
 
 
-    Book(String bookname,String author,String yearpublished,boolean availability)
+    Book(String bookname,String author,String yearpublished)
     {
         this.bookname=bookname;
         this.author=author;
         this.yearpublished=yearpublished;
-        this.availability=availability;
+
     }
 
     public String getBookName() {
@@ -30,12 +29,4 @@ public class Book {
         return yearpublished;
     }
 
-
-    public void setNotAvailable() {
-        availability=false;
-    }
-
-    public void setAvailable() {
-        availability=true;
-    }
 }

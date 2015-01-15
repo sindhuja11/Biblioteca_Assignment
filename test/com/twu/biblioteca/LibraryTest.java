@@ -22,13 +22,13 @@ public class LibraryTest {
 
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
-    private Book book =new Book("Digital Fortress","Dan Brown","1998",true);
+    private Book book =new Book("Digital Fortress","Dan Brown","1998");
 
     @Before
     public void setUpStreams() {
         books.add(book);
-        books.add(new Book("Java The Complete Reference","Herbert Schildt","2005",true));
-        books.add(new Book("Software Engineering","Zakkiuddin Ahmed","2012",true));
+        books.add(new Book("Java The Complete Reference","Herbert Schildt","2005"));
+        books.add(new Book("Software Engineering","Zakkiuddin Ahmed","2012"));
 
         System.setOut(new PrintStream(outContent));
         System.setErr(new PrintStream(errContent));
@@ -42,9 +42,9 @@ public class LibraryTest {
     @Test
     public void ShouldCheckBookDetails() {
       ArrayList<Book> availablebooks=new ArrayList<Book>();
-      availablebooks.add(new Book("Digital Fortress","Dan Brown","1998",true));
-      availablebooks.add(new Book("Java The Complete Reference","Herbert Schildt","2005",true));
-        availablebooks.add(new Book("Software Engineering","Zakkiuddin Ahmed","2012",true));
+      availablebooks.add(new Book("Digital Fortress","Dan Brown","1998"));
+      availablebooks.add(new Book("Java The Complete Reference","Herbert Schildt","2005"));
+        availablebooks.add(new Book("Software Engineering","Zakkiuddin Ahmed","2012"));
 
         ArrayList<Book> returnedlist=new Library(books).giveBookDetails();
           for(int noofbooks=0;noofbooks<availablebooks.size();noofbooks++) {
@@ -64,7 +64,7 @@ public class LibraryTest {
     @Test
     public void shouldCheckReturnOfABook() {
         Library book=new Library(books);
-        Book book1=new Book("Digital Fortress","Dan Brown","1998",true);
+        Book book1=new Book("Digital Fortress","Dan Brown","1998");
         book.checkOutBook(book1);
         assertEquals(false,book.returnBook(book1));
     }
@@ -79,7 +79,7 @@ public class LibraryTest {
     @Test
     public void shouldNotReturnOfABook() {
         Library book=new Library(books);
-        Book book1=new Book("Digital Fortress","Dan Brown","1998",true);
+        Book book1=new Book("Digital Fortress","Dan Brown","1998");
         assertEquals(false,book.returnBook(book1));
 
     }

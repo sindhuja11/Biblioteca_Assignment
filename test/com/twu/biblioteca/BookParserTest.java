@@ -13,9 +13,9 @@ public class BookParserTest {
     @Test
     public void shouldCheckReadOfAFile() {
         ArrayList<Book> books = new ArrayList<Book>();
-        books.add(new Book("Digital Fortress", "Dan Brown", "1998", true));
-        books.add(new Book("Java The Complete Reference", "Herbert Schildt", "2005", true));
-        books.add(new Book("Software Engineering", "Zakkiuddin Ahmed", "2012", true));
+        books.add(new Book("Digital Fortress", "Dan Brown", "1998"));
+        books.add(new Book("Java The Complete Reference", "Herbert Schildt", "2005"));
+        books.add(new Book("Software Engineering", "Zakkiuddin Ahmed", "2012"));
         ArrayList<Book> returnedlist =new BookParser().readFile();
         for (int noofbooks = 0; noofbooks < books.size(); noofbooks++) {
             assertEquals(books.get(noofbooks).getBookName(), returnedlist.get(noofbooks).getBookName());
