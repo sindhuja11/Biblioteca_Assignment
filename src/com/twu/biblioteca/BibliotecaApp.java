@@ -47,6 +47,7 @@ public class BibliotecaApp {
 
 
     public void menuDisplay() {
+        System.out.println("Menu");
         System.out.println("Press 1 for Books List");
         System.out.println("Press 2 for CheckOut");
         System.out.println("Press 3 for Return");
