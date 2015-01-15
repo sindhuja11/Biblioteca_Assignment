@@ -13,14 +13,6 @@ public class Library {
     }
 
     public ArrayList<Book> giveBookDetails() {
-//        ArrayList<Book> availablebooks = new ArrayList<Book>();
-//        for (Book book : books) {
-//            if (book.getAvailability()) {
-//                availablebooks.add(book);
-//            }
-//
-//        }
-//        return availablebooks;
     return books;
     }
 
@@ -32,16 +24,7 @@ public class Library {
                 return true;
             }
         return false;
-       /* for (Book book : books) {
-            if (book.getBookName().equals(book1.getBookName())) {
-                if (book.getAvailability()) {
-                    book.setNotAvailable();
-                    return true;
-                }
-            }
-        }
-        return false;
-        */
+
     }
 
 
@@ -58,10 +41,7 @@ public class Library {
 
             }
 
-
-
     }
-
 
 
 

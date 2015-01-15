@@ -22,7 +22,7 @@ public class BibliotecaApp {
                 System.out.println("Enter the bookname");
                 Scanner bookinput = new Scanner(System.in);
                 String bookname = bookinput.nextLine();
-                Librarian librarian=new Librarian(customer.books);
+                Librarian librarian = new Librarian(new Library(customer.books));
                 if(option==2)
                     librarian.callCheckoutBook(bookname);
                 if(option==3)
@@ -40,36 +40,6 @@ public class BibliotecaApp {
 
     }
 
-    /*public void bookTransaction(int option, String bookname) {
-        Library library = new Library(books);
-        if(option==2)
-        {
-            Book book = library.find(bookname);
-            //boolean availablility= library.checkOutBook(book);
-            if(book!=null)
-            {
-                library.checkOutBook(book);
-                System.out.println("Book Checked Out");
-            }
-            else
-            System.out.println("That book is not available");
-        }
-        if(option==3)
-        {
-            Book book = library.find(bookname);
-           // boolean availability= library.callReturnBook(book);
-            if(book!=null)
-            {
-                library.returnBook(book);
-                System.out.println("Thank you for returning the book");
-
-            }
-            else
-                System.out.println("This is not a valid book to return");
-
-        }
-    }
-*/
 
     public void welcomeMessage() {
         System.out.println("hello!Welcome to Biblioteca");
