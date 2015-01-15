@@ -12,10 +12,11 @@ import static org.junit.Assert.assertEquals;
 
 public class LibrarianTest {
     ArrayList<Book> books=new ArrayList<Book>();
-
+    ArrayList<Movie> movies=new ArrayList<Movie>();
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
     private Book book =new Book("Digital Fortress","Dan Brown","1998");
+    private Movie movie =new Movie("Harry Potter","2012","John Smith","9");
     private Library library;
 
     @Before
@@ -23,7 +24,10 @@ public class LibrarianTest {
         books.add(book);
         books.add(new Book("Java The Complete Reference","Herbert Schildt","2005"));
         books.add(new Book("Software Engineering","Zakkiuddin Ahmed","2012"));
-        library = new Library(books);
+        movies.add(movie);
+        movies.add(new Movie("Inception","2009","Mike Tyson","-"));
+        movies.add(new Movie("Happy days","2008","Prabhu","9"));
+        library = new Library(books,movies);
 
         System.setOut(new PrintStream(outContent));
         System.setErr(new PrintStream(errContent));
@@ -45,7 +49,7 @@ public class LibrarianTest {
     @Test
     public void shouldNotCheckoutBook()
     {
-        Library lib=new Library(books);
+        Library lib=new Library(books,movies);
         lib.checkOutBook(book);
         new Librarian(library).checkoutBook("Digital Fortress");
         assertEquals("That book is not available\n",outContent.toString());
@@ -53,7 +57,7 @@ public class LibrarianTest {
     }
     @Test
     public void shouldCheckReturnBook() {
-        Library lib=new Library(books);
+        Library lib=new Library(books,movies);
         lib.checkOutBook(book);
         new Librarian(library).returnBook("Digital Fortress");
         assertEquals("Thank you for returning the book\n",outContent.toString());
@@ -70,5 +74,25 @@ public class LibrarianTest {
                 "Java The Complete Reference,Herbert Schildt,2005\n" +
                 "Software Engineering,Zakkiuddin Ahmed,2012\n",outContent.toString());
     }
+    @Test
+    public void shouldGiveMovieList() {
+        new Librarian(library).giveMovieList();
+        assertEquals("Harry Potter,2012,John Smith,9\n"+
+                "Inception,2009,Mike Tyson,-\n"+
+                "Happy days,2008,Prabhu,9\n",outContent.toString());
+    }
+    @Test
+    public void shouldCheckoutMovie() {
+        new Librarian(library).checkoutMovie("Harry Potter");
+        assertEquals("Movie Checked Out\n",outContent.toString());
 
+    }
+    @Test
+    public void shouldNotCheckoutMovie() {
+        new Librarian(library).checkoutMovie("Harry Potter");
+        outContent.reset();
+        new Librarian(library).checkoutMovie("Harry Potter");
+        assertEquals("That movie is not available\n",outContent.toString());
+
+    }
 }

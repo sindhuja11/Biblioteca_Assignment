@@ -34,21 +34,26 @@ public class BibliotecaTest {
     public void test() {
         assertEquals(1, 1);
     }
+
     @Test
     public void shouldCheckWelcomeMessage() {
         new BibliotecaApp().welcomeMessage();
         assertEquals("hello!Welcome to Biblioteca\n", outContent.toString());
     }
+
     @Test
     public void shouldCheckMenu() {
 
-    new BibliotecaApp().menuDisplay();
-    assertEquals("Menu\n"+
-            "Press 1 for Books List\n"+
-        "Press 2 for CheckOut\n"+
-        "Press 3 for Return\n"+
-        "Press 4 for Quit\n",outContent.toString());
+        new BibliotecaApp().menuDisplay();
+        assertEquals("Menu\n" +
+                "Press 1 for Books List\n" +
+                "Press 2 for CheckOut Book\n"+
+                "Press 3 for Return book\n" +
+                "Press 5 for  Movie List\n" +
+                "Press 6 for Checkout Movie\n"+
+                "Press 4 for Quit\n", outContent.toString());
     }
+
     @Test
     public void shouldCheckQuit() {
         assertEquals("Thank You!", new BibliotecaApp().quit());

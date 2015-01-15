@@ -10,7 +10,7 @@ public class Librarian {
     }
 
     public void checkoutBook(String bookName) {
-        Book book = library.find(bookName);
+        Book book = library.findBook(bookName);
         if (library.checkOutBook(book))
             System.out.println("Book Checked Out");
         else
@@ -18,7 +18,7 @@ public class Librarian {
     }
 
     public void returnBook(String bookToReturn) {
-        Book book = library.find(bookToReturn);
+        Book book = library.findBook(bookToReturn);
         if (library.returnBook(book))
             System.out.println("This is not a valid book to return");
         else
@@ -31,7 +31,27 @@ public class Librarian {
         ArrayList<Book> books=library.giveBookDetails();
         for(int noofbooks=0;noofbooks<books.size();noofbooks++)
         {
-            System.out.println(books.get(noofbooks).getBookName()+","+books.get(noofbooks).getAuthor()+","+books.get(noofbooks).getyearPublished());
+            System.out.println(books.get(noofbooks).getBookName()+","+books.get(noofbooks).getAuthor()+","+
+                    books.get(noofbooks).getyearPublished());
         }
+    }
+
+    public void giveMovieList() {
+        ArrayList<Movie> movies=library.giveMovieDetails();
+        for(int noofmovies=0;noofmovies<movies.size();noofmovies++)
+        {
+            System.out.println(movies.get(noofmovies).getMovieName()+","+movies.get(noofmovies).getYearReleased()+","+
+                    movies.get(noofmovies).getDirector()+","+ movies.get(noofmovies).getMovieRating());
+        }
+    }
+
+    public void checkoutMovie(String movieName) {
+        Movie movie=library.findMovie(movieName);
+        if(library.checkoutMovie(movie))
+            System.out.println("Movie Checked Out");
+            else
+            System.out.println("That movie is not available");
+
+
     }
 }

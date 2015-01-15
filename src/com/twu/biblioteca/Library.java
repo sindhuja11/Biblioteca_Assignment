@@ -7,9 +7,12 @@ import java.util.ArrayList;
  */
 public class Library {
     private ArrayList<Book> books;
+    private ArrayList<Movie> movies;
     private static ArrayList<Book> borrowedbooks=new ArrayList<Book>();
-    public Library(ArrayList<Book> books) {
+    private static ArrayList<Movie> borrowedmovies=new ArrayList<Movie>();
+    public Library(ArrayList<Book> books,ArrayList<Movie> movies) {
         this.books = books;
+        this.movies=movies;
     }
 
     public ArrayList<Book> giveBookDetails() {
@@ -43,7 +46,7 @@ public class Library {
 
     }
 
-    public Book find(String name) {
+    public Book findBook(String name) {
         for (Book book : books) {
             if (book.getBookName().equals(name))
                 return book;
@@ -54,6 +57,32 @@ public class Library {
         }
 
         return null;
+    }
+
+    public ArrayList<Movie> giveMovieDetails() {
+        return movies;
+    }
+
+    public Movie findMovie(String movieName) {
+        for (Movie movie : movies) {
+            if(movie.getMovieName().equals(movieName))
+                return movie;
+        }
+        for (Movie movie : borrowedmovies) {
+            if(movie.getMovieName().equals(movieName))
+                return movie;
+        }
+        return null;
+    }
+
+    public boolean checkoutMovie(Movie movie) {
+        if(movies.contains(movie))
+        {
+            movies.remove(movie);
+            borrowedmovies.add(movie);
+            return true;
+        }
+        return false;
     }
 }
 
