@@ -3,6 +3,7 @@ package com.twu.biblioteca;
 /**
  * Created by Administrator on 13/01/15.
  */
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -55,27 +56,31 @@ public class LibraryTest {
 
     @Test
     public void shouldCheckOutBook() {
-
-        assertEquals(true, new Library(books).checkOutBook(new Book("Digital Fortress","Dan Brown","1998",true)));
-
-       // assertEquals("Book Checked Out\n", outContent.toString());
+        Library library = new Library(books);
+        library.checkOutBook(book);
+        assertEquals(2, books.size());
     }
 
-    @Test
-    public void shouldNotCheckOutBook() {
-
-//        new Library(books).checkOutBook("Digital Fortress");
-        new Library(books).checkOutBook(new Book("Digital Fortress","Dan Brown","1998",true));
-        assertEquals(false, new Library(books).checkOutBook(new Book("Digital Fortress","Dan Brown","1998",true)));
-    }
     @Test
     public void shouldCheckReturnOfABook() {
-        new Library(books).checkOutBook(new Book("Digital Fortress","Dan Brown","1998",true));
-          assertEquals(true, new Library(books).returningBook("Digital Fortress"));
+        Library book=new Library(books);
+        Book book1=new Book("Digital Fortress","Dan Brown","1998",true);
+        book.checkOutBook(book1);
+        assertEquals(false,book.returnBook(book1));
+    }
+
+    @Test
+    public void shouldCheckReturnAddtoList() {
+        Library book1=new Library(books);
+        book1.checkOutBook(book);
+        book1.returnBook(book);
+        assertEquals(3,books.size());
     }
     @Test
     public void shouldNotReturnOfABook() {
-        assertEquals(true,  new Library(books).returningBook("Digital Fortress"));
+        Library book=new Library(books);
+        Book book1=new Book("Digital Fortress","Dan Brown","1998",true);
+        assertEquals(false,book.returnBook(book1));
 
     }
 

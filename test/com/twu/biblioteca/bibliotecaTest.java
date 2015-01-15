@@ -74,4 +74,10 @@ public class BibliotecaTest {
         assertEquals("Thank You!", new BibliotecaApp().quit());
     }
 
+   /* @Test
+    public void shouldCheckBookTransaction() {
+    new BibliotecaApp().(2,"Digital Fortress");
+    assertEquals("Book Checked Out",outContent.toString());
+    }*/
+
 }
