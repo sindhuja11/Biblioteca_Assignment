@@ -5,22 +5,17 @@ import java.util.Scanner;
 
 public class BibliotecaApp {
     ArrayList<Book> books = new ArrayList<Book>();
-    ArrayList<Movie> movies=new ArrayList<Movie>();
-    ArrayList<User> users=new ArrayList<User>();
+    ArrayList<Movie> movies = new ArrayList<Movie>();
+    ArrayList<User> users = new ArrayList<User>();
+
     public static void main(String[] args) {
-//        ArrayList<String> libraryId=new ArrayList<String>();
-//        ArrayList<String> password=new ArrayList<String>();
-//        libraryId.add("123-1234");
-//        libraryId.add("154-1357");
-//        password.add("hello");
-//        password.add("password");
         BibliotecaApp customer = new BibliotecaApp();
-        customer.users=new UserDetailsParser().readFile();
+        boolean login = false;
+        String username="";
         customer.books = new BookParser().readFile();
-        customer.movies=new MovieParser().readFile();
-        Library library = new Library(customer.books,customer.movies,customer.users);
+        customer.movies = new MovieParser().readFile();
+        Library library = new Library(customer.books, customer.movies, customer.users);
         Librarian librarian = new Librarian(library);
-        LoginValidation user=new LoginValidation(customer.users);
         User user1;
         customer.welcomeMessage();
         int option;
@@ -32,34 +27,61 @@ public class BibliotecaApp {
                     librarian.giveBookList();
                     break;
                 case 2:
-                    System.out.println("Enter the bookname");
-                    librarian.checkoutBook(new Scanner(System.in).nextLine());
+                    if (login) {
+                        System.out.println("Enter the bookname");
+                        librarian.checkoutBook(new Scanner(System.in).nextLine(),username);
+                    } else {
+                        System.out.println("please login to checkout");
+                    }
                     break;
                 case 3:
-                    System.out.println("Enter the bookname");
-                    librarian.returnBook(new Scanner(System.in).nextLine());
+                    if (login) {
+                        System.out.println("Enter the bookname");
+                        librarian.returnBook(new Scanner(System.in).nextLine());
+                    } else
+                        System.out.println("please login to return");
                     break;
                 case 4:
                     customer.quit();
                     break;
-                case 5:librarian.giveMovieList();
+                case 5:
+                    librarian.giveMovieList();
                     break;
-                case 6:System.out.println("Enter the movie name");
-                    librarian.checkoutMovie(new Scanner(System.in).nextLine());
-                case 7:System.out.println("Enter userId and Password for login");
-                    Scanner userid=new Scanner(System.in);
-                    String id=userid.nextLine();
-                    user1=user.loginValidation(id, new Scanner(System.in).nextLine());
-                     if(user1!=null) {
-                        System.out.println("login successfull");
-                        librarian.giveUserDetails(user1);
+                case 6:
+                    if (login) {
+                        System.out.println("Enter the movie name");
+                        librarian.checkoutMovie(new Scanner(System.in).nextLine(),username);
+                    } else
+                        System.out.println("please login to checkout");
+                    break;
+                case 7:
+                    do {
+                        System.out.println("Enter userId and Password for login");
+
+                        user1 = new Login().userLogin(new Scanner(System.in).nextLine(), new Scanner(System.in).nextLine());
+                        if (user1 != null) {
+                            login = true;
+                            username=user1.getName();
+                            librarian.giveUserDetails(user1);
+                        }
+                    } while (!login);
+
+                    break;
+                case 8:
+                    if (login) {
+                        System.out.println("Enter the bookname");
+                        librarian.returnMovie(new Scanner(System.in).nextLine());
                     }
+                    break;
+                case 9: if(login) {
+                    System.out.println("Checkout List:");
+                    librarian.displayCheckOutList();
+                }
                     else
-                     System.out.println("login unsuccessful");
+                System.out.println("please login to checkout");
                     break;
                 default:
                     System.out.println("Invalid Option");
-
 
             }
 
@@ -77,10 +99,13 @@ public class BibliotecaApp {
         System.out.println("Press 1 for Books List");
         System.out.println("Press 2 for CheckOut Book");
         System.out.println("Press 3 for Return book");
+        System.out.println("Press 4 for Quit");
         System.out.println("Press 5 for  Movie List");
         System.out.println("Press 6 for Checkout Movie");
         System.out.println("Press 7 for Login");
-        System.out.println("Press 4 for Quit");
+        System.out.println("Press 8 for Return Movie");
+        System.out.println("Press 9 for checkout list");
+
     }
 
 

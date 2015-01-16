@@ -16,20 +16,12 @@ import static org.junit.Assert.assertEquals;
 public class LoginValidationTest {
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
-   // ArrayList<String> libraryId=new ArrayList<String>();
-    //ArrayList<String> password=new ArrayList<String>();
     ArrayList<User> users =new ArrayList<User>();
     private User user=new User("Sindhu","sindhum@thoughtworks.com","8390419567","123-1234","hello");
 
-    // Login user=new Login("123-1234","hello");
     @Before
     public void setUpStreams() {
 
-        /*libraryId.add("123-1234");
-        libraryId.add("154-1357");
-        password.add("hello");
-        password.add("password");
-        */
         users.add(user);
         users.add(new User("Aishwarya","aish@gmail.com","7986342156","154-1357","password"));
         System.setOut(new PrintStream(outContent));

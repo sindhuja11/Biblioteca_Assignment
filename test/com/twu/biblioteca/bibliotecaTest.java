@@ -49,10 +49,12 @@ public class BibliotecaTest {
                 "Press 1 for Books List\n" +
                 "Press 2 for CheckOut Book\n"+
                 "Press 3 for Return book\n" +
+                "Press 4 for Quit\n"+
                 "Press 5 for  Movie List\n" +
                 "Press 6 for Checkout Movie\n"+
                 "Press 7 for Login\n"+
-                "Press 4 for Quit\n", outContent.toString());
+                "Press 8 for Return Movie\n"+
+                "Press 9 for checkout list\n", outContent.toString());
     }
 
     @Test

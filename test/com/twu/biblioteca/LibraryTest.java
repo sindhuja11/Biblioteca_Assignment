@@ -147,7 +147,23 @@ public class LibraryTest {
             assertEquals("8390419567",user1.getPhoneNumber());
 
         }
+    @Test
+    public void shouldCheckReturnOfAMovie() {
+        Library movie=new Library(books,movies,users);
+        Movie movie1=new Movie("Harry Potter","2012","John Smith","9");
+        movie.checkoutMovie(movie1);
+        assertEquals(false,movie.returnMovie(movie1));
     }
+
+    @Test
+    public void shouldNotReturnAMovie() {
+        Library movie = new Library(books, movies, users);
+        Movie movie1 = new Movie("Harry Potter", "2012", "John Smith", "9");
+        assertEquals(false, movie.returnMovie(movie1));
+    }
+
+
+}
 
 
 

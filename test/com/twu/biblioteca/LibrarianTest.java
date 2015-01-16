@@ -46,7 +46,7 @@ public class LibrarianTest {
     @Test
     public void shouldCheckoutBook()
     {
-        new Librarian(library).checkoutBook("Digital Fortress");
+        new Librarian(library).checkoutBook("Digital Fortress",user.getName());
         assertEquals("Book Checked Out\n",outContent.toString());
 
     }
@@ -55,7 +55,7 @@ public class LibrarianTest {
     {
         Library lib=new Library(books,movies,users);
         lib.checkOutBook(book);
-        new Librarian(library).checkoutBook("Digital Fortress");
+        new Librarian(library).checkoutBook("Digital Fortress", user.getName());
         assertEquals("That book is not available\n",outContent.toString());
 
     }
@@ -87,21 +87,44 @@ public class LibrarianTest {
     }
     @Test
     public void shouldCheckoutMovie() {
-        new Librarian(library).checkoutMovie("Harry Potter");
+        new Librarian(library).checkoutMovie("Harry Potter", user.getName());
         assertEquals("Movie Checked Out\n",outContent.toString());
 
     }
     @Test
     public void shouldNotCheckoutMovie() {
-        new Librarian(library).checkoutMovie("Harry Potter");
+        new Librarian(library).checkoutMovie("Harry Potter", user.getName());
         outContent.reset();
-        new Librarian(library).checkoutMovie("Harry Potter");
+        new Librarian(library).checkoutMovie("Harry Potter", user.getName());
         assertEquals("That movie is not available\n",outContent.toString());
 
     }
     @Test
     public void shouldGiveUserDetails() {
         new Librarian(library).giveUserDetails(user);
-        assertEquals("Details:\n"+"Sindhu"+","+"sindhum@thoughtworks.com"+","+"8390419567\n",outContent.toString());
+        assertEquals("Details:\n" + "Sindhu" + "," + "sindhum@thoughtworks.com" + "," + "8390419567\n", outContent.toString());
     }
+    @Test
+    public void shouldReturnMovie() {
+        Library lib=new Library(books,movies,users);
+        lib.checkoutMovie(movie);
+        new Librarian(library).returnMovie("Harry Potter");
+        assertEquals("Thank you for returning the movie\n",outContent.toString());
+    }
+    @Test
+    public void shouldNotReturnMovie() {
+        new Librarian(library).returnMovie("Harry Potter");
+        assertEquals("This is not a valid movie to return\n",outContent.toString());
+    }
+    @Test
+    public void shouldDisplayCheckOutListOfAUser() {
+        Library lib=new Library(books,movies,users);
+        Librarian library=new Librarian(lib);
+        library.checkoutBook("Digital Fortress", user.getName());
+        outContent.reset();
+        library.displayCheckOutList();
+        assertEquals("Digital Fortress\n", outContent.toString());
+    }
+
+
 }

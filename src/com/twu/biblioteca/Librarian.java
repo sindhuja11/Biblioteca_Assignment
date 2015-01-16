@@ -1,19 +1,21 @@
 package com.twu.biblioteca;
 
 import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.HashMap;
 
 public class Librarian {
     private Library library;
-
+    static HashMap<String,String> checkOutList=new HashMap<String, String>();
     public Librarian(Library library) {
         this.library = library;
     }
 
-    public void checkoutBook(String bookName) {
+    public void checkoutBook(String bookName, String username) {
         Book book = library.findBook(bookName);
-        if (library.checkOutBook(book))
+        if (library.checkOutBook(book)) {
+            checkOutList.put(bookName,username);
             System.out.println("Book Checked Out");
+        }
         else
             System.out.println("That book is not available");
     }
@@ -22,9 +24,10 @@ public class Librarian {
         Book book = library.findBook(bookToReturn);
         if (library.returnBook(book))
             System.out.println("This is not a valid book to return");
-        else
+        else {
+            checkOutList.remove(bookToReturn);
             System.out.println("Thank you for returning the book");
-
+        }
     }
 
 
@@ -46,11 +49,13 @@ public class Librarian {
         }
     }
 
-    public void checkoutMovie(String movieName) {
+    public void checkoutMovie(String movieName, String username) {
         Movie movie=library.findMovie(movieName);
-        if(library.checkoutMovie(movie))
+        if(library.checkoutMovie(movie)) {
+            checkOutList.put(movieName,username);
             System.out.println("Movie Checked Out");
-            else
+        }
+        else
             System.out.println("That movie is not available");
 
 
@@ -63,4 +68,20 @@ public class Librarian {
 
     }
 
+    public void returnMovie(String movieName) {
+        Movie movie = library.findMovie(movieName);
+        if (library.returnMovie(movie))
+            System.out.println("This is not a valid movie to return");
+        else {
+            checkOutList.remove(movieName);
+            System.out.println("Thank you for returning the movie");
+        }
     }
+
+
+    public void displayCheckOutList() {
+        for (String book : checkOutList.keySet()) {
+            System.out.println(book);
+        }
+    }
+}

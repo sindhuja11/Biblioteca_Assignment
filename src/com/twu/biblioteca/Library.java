@@ -1,7 +1,6 @@
 package com.twu.biblioteca;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * Created by Administrator on 11/01/15.
@@ -97,12 +96,19 @@ public class Library {
         return null;
     }
 
-    public User findUser(String userid) {
-        for (User user : users) {
-            if(user.getUserID().equals(userid))
-                return user;
+
+    public boolean returnMovie(Movie movieToReturn) {
+        if(movies.contains(movieToReturn)) {
+            return true;
         }
-        return null;
+        else
+        {
+            movies.add(movieToReturn);
+            borrowedmovies.remove(movieToReturn);
+            return false;
+
+        }
+
     }
 }
 

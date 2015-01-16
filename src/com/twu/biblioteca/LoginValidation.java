@@ -6,8 +6,6 @@ import java.util.ArrayList;
  * Created by sindhum on 15/01/15.
  */
 public class LoginValidation {
-   // private ArrayList<String> userId;
-    //private ArrayList<String> password;
     private ArrayList<User> users;
     LoginValidation(ArrayList<User> users) {
     this.users=users;
@@ -23,14 +21,5 @@ public class LoginValidation {
             }
            return null;
 
-//        if(userId.contains(id)&& password.contains(p))
-//        {
-//            System.out.println("Login Successfull");
-//            return true;
-//        }
-//        else {
-//            System.out.println("Login Unsuccessfull");
-//            return false;
-//        }
     }
 }
