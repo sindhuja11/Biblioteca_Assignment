@@ -1,6 +1,7 @@
 package com.twu.biblioteca;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Librarian {
     private Library library;
@@ -54,4 +55,12 @@ public class Librarian {
 
 
     }
-}
+
+    public void giveUserDetails(User user1) {
+        User user=library.giveUserDetails(user1);
+        if(user!=null)
+        System.out.println("Details:\n"+user.getName()+","+user.getEmail()+","+user.getPhoneNumber());
+
+    }
+
+    }

@@ -6,13 +6,22 @@ import java.util.Scanner;
 public class BibliotecaApp {
     ArrayList<Book> books = new ArrayList<Book>();
     ArrayList<Movie> movies=new ArrayList<Movie>();
-
+    ArrayList<User> users=new ArrayList<User>();
     public static void main(String[] args) {
+//        ArrayList<String> libraryId=new ArrayList<String>();
+//        ArrayList<String> password=new ArrayList<String>();
+//        libraryId.add("123-1234");
+//        libraryId.add("154-1357");
+//        password.add("hello");
+//        password.add("password");
         BibliotecaApp customer = new BibliotecaApp();
+        customer.users=new UserDetailsParser().readFile();
         customer.books = new BookParser().readFile();
         customer.movies=new MovieParser().readFile();
-        Library library = new Library(customer.books,customer.movies);
+        Library library = new Library(customer.books,customer.movies,customer.users);
         Librarian librarian = new Librarian(library);
+        LoginValidation user=new LoginValidation(customer.users);
+        User user1;
         customer.welcomeMessage();
         int option;
         do {
@@ -37,6 +46,16 @@ public class BibliotecaApp {
                     break;
                 case 6:System.out.println("Enter the movie name");
                     librarian.checkoutMovie(new Scanner(System.in).nextLine());
+                case 7:System.out.println("Enter userId and Password for login");
+                    Scanner userid=new Scanner(System.in);
+                    String id=userid.nextLine();
+                    user1=user.loginValidation(id, new Scanner(System.in).nextLine());
+                     if(user1!=null) {
+                        System.out.println("login successfull");
+                        librarian.giveUserDetails(user1);
+                    }
+                    else
+                     System.out.println("login unsuccessful");
                     break;
                 default:
                     System.out.println("Invalid Option");
@@ -60,6 +79,7 @@ public class BibliotecaApp {
         System.out.println("Press 3 for Return book");
         System.out.println("Press 5 for  Movie List");
         System.out.println("Press 6 for Checkout Movie");
+        System.out.println("Press 7 for Login");
         System.out.println("Press 4 for Quit");
     }
 
@@ -67,5 +87,6 @@ public class BibliotecaApp {
     public String quit() {
         return "Thank You!";
     }
+
 
 }

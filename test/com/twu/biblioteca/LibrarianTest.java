@@ -13,10 +13,12 @@ import static org.junit.Assert.assertEquals;
 public class LibrarianTest {
     ArrayList<Book> books=new ArrayList<Book>();
     ArrayList<Movie> movies=new ArrayList<Movie>();
+    ArrayList<User> users=new ArrayList<User>();
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
     private Book book =new Book("Digital Fortress","Dan Brown","1998");
     private Movie movie =new Movie("Harry Potter","2012","John Smith","9");
+    private User user=new User("Sindhu","sindhum@thoughtworks.com","8390419567","123-1234","hello");
     private Library library;
 
     @Before
@@ -27,7 +29,9 @@ public class LibrarianTest {
         movies.add(movie);
         movies.add(new Movie("Inception","2009","Mike Tyson","-"));
         movies.add(new Movie("Happy days","2008","Prabhu","9"));
-        library = new Library(books,movies);
+        users.add(user);
+        users.add(new User("Aishwarya","aish@gmail.com","7986342156","154-1357","password"));
+        library = new Library(books,movies, users);
 
         System.setOut(new PrintStream(outContent));
         System.setErr(new PrintStream(errContent));
@@ -49,7 +53,7 @@ public class LibrarianTest {
     @Test
     public void shouldNotCheckoutBook()
     {
-        Library lib=new Library(books,movies);
+        Library lib=new Library(books,movies,users);
         lib.checkOutBook(book);
         new Librarian(library).checkoutBook("Digital Fortress");
         assertEquals("That book is not available\n",outContent.toString());
@@ -57,7 +61,7 @@ public class LibrarianTest {
     }
     @Test
     public void shouldCheckReturnBook() {
-        Library lib=new Library(books,movies);
+        Library lib=new Library(books,movies,users);
         lib.checkOutBook(book);
         new Librarian(library).returnBook("Digital Fortress");
         assertEquals("Thank you for returning the book\n",outContent.toString());
@@ -94,5 +98,10 @@ public class LibrarianTest {
         new Librarian(library).checkoutMovie("Harry Potter");
         assertEquals("That movie is not available\n",outContent.toString());
 
+    }
+    @Test
+    public void shouldGiveUserDetails() {
+        new Librarian(library).giveUserDetails(user);
+        assertEquals("Details:\n"+"Sindhu"+","+"sindhum@thoughtworks.com"+","+"8390419567\n",outContent.toString());
     }
 }

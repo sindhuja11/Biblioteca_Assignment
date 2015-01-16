@@ -1,6 +1,7 @@
 package com.twu.biblioteca;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * Created by Administrator on 11/01/15.
@@ -8,11 +9,13 @@ import java.util.ArrayList;
 public class Library {
     private ArrayList<Book> books;
     private ArrayList<Movie> movies;
+    private ArrayList<User> users;
     private static ArrayList<Book> borrowedbooks=new ArrayList<Book>();
     private static ArrayList<Movie> borrowedmovies=new ArrayList<Movie>();
-    public Library(ArrayList<Book> books,ArrayList<Movie> movies) {
+    public Library(ArrayList<Book> books, ArrayList<Movie> movies, ArrayList<User> users) {
         this.books = books;
         this.movies=movies;
+        this.users=users;
     }
 
     public ArrayList<Book> giveBookDetails() {
@@ -83,6 +86,23 @@ public class Library {
             return true;
         }
         return false;
+    }
+    public User giveUserDetails(User user1) {
+        for (User user : users) {
+        if(user.equals(user1))
+        {
+            return user;
+        }
+        }
+        return null;
+    }
+
+    public User findUser(String userid) {
+        for (User user : users) {
+            if(user.getUserID().equals(userid))
+                return user;
+        }
+        return null;
     }
 }
 
