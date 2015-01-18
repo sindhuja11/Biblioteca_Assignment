@@ -6,22 +6,24 @@ import java.util.ArrayList;
  * Created by sindhum on 15/01/15.
  */
 public class Login {
-    User user1;
-    ArrayList<User> users=new ArrayList<User>();
+    private ArrayList<User> users;
 
-    public User userLogin(String id,String password)
-    {
-        users=new UserDetailsParser().readFile();
-        LoginValidation user=new LoginValidation(users);
-        user1=user.loginValidation(id, password);
-        if(user1!=null) {
-            System.out.println("login successfull");
-            return user1;
-
-        }
-        else {
-            System.out.println("login unsuccessfull");
-            return null;
-        }
+    Login(ArrayList<User> users) {
+        this.users = users;
     }
-   }
+
+    public User loginValidate(String id, String password) {
+
+        for (User user : users) {
+
+            if (user.getUserID().equals(id) && user.getPassword().equals(password)) {
+                System.out.println("login successfull");
+                return user;
+            }
+        }
+
+        System.out.println("login unsuccessfull");
+        return null;
+    }
+}
+

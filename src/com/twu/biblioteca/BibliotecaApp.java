@@ -9,18 +9,19 @@ public class BibliotecaApp {
     ArrayList<User> users = new ArrayList<User>();
 
     public static void main(String[] args) {
-        BibliotecaApp customer = new BibliotecaApp();
+        BibliotecaApp bibliotecaApp = new BibliotecaApp();
         boolean login = false;
         String username="";
-        customer.books = new BookParser().readFile();
-        customer.movies = new MovieParser().readFile();
-        Library library = new Library(customer.books, customer.movies, customer.users);
+        bibliotecaApp.books = new BookParser().readFile();
+        bibliotecaApp.movies = new MovieParser().readFile();
+        bibliotecaApp.users=new UserDetailsParser().readFile();
+        Library library = new Library(bibliotecaApp.books, bibliotecaApp.movies, bibliotecaApp.users);
         Librarian librarian = new Librarian(library);
         User user1;
-        customer.welcomeMessage();
+        bibliotecaApp.welcomeMessage();
         int option;
         do {
-            customer.menuDisplay();
+            bibliotecaApp.menuDisplay();
             option = new Scanner(System.in).nextInt();
             switch (option) {
                 case 1:
@@ -42,7 +43,7 @@ public class BibliotecaApp {
                         System.out.println("please login to return");
                     break;
                 case 4:
-                    customer.quit();
+                    bibliotecaApp.quit();
                     break;
                 case 5:
                     librarian.giveMovieList();
@@ -58,7 +59,7 @@ public class BibliotecaApp {
                     do {
                         System.out.println("Enter userId and Password for login");
 
-                        user1 = new Login().userLogin(new Scanner(System.in).nextLine(), new Scanner(System.in).nextLine());
+                        user1 = new Login(bibliotecaApp.users).loginValidate(new Scanner(System.in).nextLine(), new Scanner(System.in).nextLine());
                         if (user1 != null) {
                             login = true;
                             username=user1.getName();
