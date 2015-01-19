@@ -12,7 +12,7 @@ import static org.junit.Assert.assertEquals;
 /**
  * Created by sindhum on 19/01/15.
  */
-public class InputManagerTest {
+public class LoginManagerTest {
     ArrayList<Book> books=new ArrayList<Book>();
     ArrayList<Movie> movies=new ArrayList<Movie>();
     ArrayList<User> users=new ArrayList<User>();
@@ -43,12 +43,22 @@ public class InputManagerTest {
 
     @Test
     public void shouldCheckoutBook() {
-        new InputManager(librarian).checkoutBook(null);
+        new LoginManager(librarian).checkoutBook(null);
         assertEquals("Please login to checkout\n",outContent.toString());
     }
-    /*@Test
-    public void shouldCheckOutBook() {
-        new InputManager(librarian).checkoutBook("sindhu");
-        assertEquals("enter the bookname\n",outContent.toString());
-    }*/
+    @Test
+    public void shouldCheckoutMovie() {
+        new LoginManager(librarian).checkoutMovie(null);
+        assertEquals("Please login to checkout\n",outContent.toString());
+    }
+    @Test
+    public void shouldReturnMovie() {
+        new LoginManager(librarian).returnMovie(null);
+        assertEquals("please login to return\n",outContent.toString());
+    }
+    @Test
+    public void shouldReturnBook() {
+        new LoginManager(librarian).returnBook(null);
+        assertEquals("please login to return\n",outContent.toString());
+    }
 }

@@ -5,25 +5,25 @@ import java.util.Scanner;
 /**
  * Created by sindhum on 18/01/15.
  */
-public class InputManager {
+public class LoginManager {
     private Librarian librarian;
-    public InputManager(Librarian librarian) {
+    public LoginManager(Librarian librarian) {
         this.librarian=librarian;
     }
 
-    public void checkoutBook(String userName)
+    public void checkoutBook(User user)
     {
-        if(userName!=null)
+        if(user!=null)
         {
             System.out.println("enter the bookname");
-            librarian.checkoutBook(new Scanner(System.in).nextLine(),userName);
+            librarian.checkoutBook(new Scanner(System.in).nextLine(), user.getName());
         }
         else
             System.out.println("Please login to checkout");
     }
 
-    public void returnBook(String userName) {
-        if(userName!=null)
+    public void returnBook(User user) {
+        if(user!=null)
         {
             System.out.println("Enter the bookname");
             librarian.returnBook(new Scanner(System.in).nextLine());
@@ -33,18 +33,18 @@ public class InputManager {
 
     }
 
-    public void checkoutMovie(String userName) {
-        if(userName!=null)
+    public void checkoutMovie(User user) {
+        if(user!=null)
         {
             System.out.println("Enter the movie name");
-            librarian.checkoutMovie(new Scanner(System.in).nextLine(),userName);
+            librarian.checkoutMovie(new Scanner(System.in).nextLine(),user.getName());
         }
         else
             System.out.println("Please login to checkout");
 
     }
 
-    public void returnMovie(String userName) {
+    public void returnMovie(User userName) {
         if(userName!=null)
         {
             System.out.println("Enter the bookname");
@@ -54,7 +54,7 @@ public class InputManager {
             System.out.println("please login to return");
     }
 
-    public void displayCheckOutList(String userName) {
+    public void displayCheckOutList(User userName) {
         if(userName!=null)
         {
             System.out.println("Checkout List:");

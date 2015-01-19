@@ -15,9 +15,8 @@ public class BibliotecaApp {
         bibliotecaApp.users=new UserDetailsParser().readFile();
         Library library = new Library(bibliotecaApp.books, bibliotecaApp.movies, bibliotecaApp.users);
         Librarian librarian = new Librarian(library);
-        InputManager inputManager=new InputManager(librarian);
-        User user1;
-        String userName=null;
+        LoginManager loginManager=new LoginManager(librarian);
+        User user = null;
         bibliotecaApp.welcomeMessage();
         int option;
         do {
@@ -28,10 +27,10 @@ public class BibliotecaApp {
                     librarian.giveBookList();
                     break;
                 case 2:
-                    inputManager.checkoutBook(userName);
+                    loginManager.checkoutBook(user);
                     break;
                 case 3:
-                    inputManager.returnBook(userName);
+                    loginManager.returnBook(user);
                     break;
                 case 4:
                     bibliotecaApp.quit();
@@ -40,26 +39,26 @@ public class BibliotecaApp {
                     librarian.giveMovieList();
                     break;
                 case 6:
-                    inputManager.checkoutMovie(userName);
+                    loginManager.checkoutMovie(user);
                     break;
                 case 7:
-                  //  inputManager.login();
-                    do {
+                    while ((user==null)){
                         System.out.println("Enter userId and Password for login");
 
-                        user1 = new Login(bibliotecaApp.users).loginValidate(new Scanner(System.in).nextLine(), new Scanner(System.in).nextLine());
-                        if (user1 != null) {
-                            userName=user1.getName();
-                            librarian.giveUserDetails(user1);
+                        user = new Login(bibliotecaApp.users).loginValidate(new Scanner(System.in).nextLine(), new Scanner(System.in).nextLine());
+                        if (user != null) {
+                            librarian.giveUserDetails(user);
                         }
-                    } while (!(userName!=null));
+                   }
 
                     break;
                 case 8:
-                    inputManager.returnMovie(userName);
+                    loginManager.returnMovie(user);
                     break;
                 case 9:
-                    inputManager.displayCheckOutList(userName);
+                    loginManager.displayCheckOutList(user);
+                    break;
+                case 10: user=null;
                     break;
                 default:
                     System.out.println("Invalid Option");
@@ -86,6 +85,7 @@ public class BibliotecaApp {
         System.out.println("Press 7 for Login");
         System.out.println("Press 8 for Return Movie");
         System.out.println("Press 9 for checkout list");
+        System.out.println("Press 10 for logout");
 
     }
 
