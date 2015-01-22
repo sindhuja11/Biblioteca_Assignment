@@ -7,6 +7,8 @@ import java.util.ArrayList;
  */
 public class Login {
     private ArrayList<User> users;
+    private User currentUser;
+
 
     Login(ArrayList<User> users) {
         this.users = users;
@@ -18,12 +20,20 @@ public class Login {
 
             if (user.getUserID().equals(id) && user.getPassword().equals(password)) {
                 System.out.println("login successfull");
+                currentUser=user;
                 return user;
             }
         }
 
         System.out.println("login unsuccessfull");
+        currentUser=null;
         return null;
     }
+    public User getCurrentUser() {
+       
+        return currentUser;
+    }
+
+
 }
 

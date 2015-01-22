@@ -50,8 +50,8 @@ public class BibliotecaTest {
                 "Press 6 for Checkout Movie\n"+
                 "Press 7 for Login\n"+
                 "Press 8 for Return Movie\n"+
-                "Press 9 for checkout list\n"+
-                "Press 10 for logout\n", outContent.toString());
+                "Press 9 for checkout list\n"
+                , outContent.toString());
     }
 
     @Test
